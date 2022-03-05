@@ -54,7 +54,7 @@ const Home = () => {
   const wallet = useAnchorWallet();
 
   const classes = useStyles();
-
+  
   const renderTime = ({ remainingTime } : { remainingTime: any}) => {
     setTimeLeft(remainingTime);
     return remainingTime;
@@ -85,7 +85,7 @@ const Home = () => {
     if (!wallet) {
       return;
     }
-
+    getWord(wallet.publicKey.toString());
     getPayout();
   });
 
