@@ -15,7 +15,7 @@ const POOL_PDA = new anchor.web3.PublicKey(
   "CoDTqzRy4P4jQqz3FadbWJJHdLupsQH7PrrvLNgodNFX"
 );
 
-const url = "http://localhost:4800";
+const url = "https://hangman-solwager.herokuapp.com";
 
 async function getData(url = '', data = {}) {
   const response = await fetch(url, {
