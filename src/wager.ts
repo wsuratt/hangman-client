@@ -15,7 +15,7 @@ const POOL_PDA = new anchor.web3.PublicKey(
   "CoDTqzRy4P4jQqz3FadbWJJHdLupsQH7PrrvLNgodNFX"
 );
 
-const url = "https://secure-fjord-13213.herokuapp.com/https://hangman-solwager.herokuapp.com";
+const url = "https://hangman-solwager.herokuapp.com";
 
 async function getData(url = '', data = {}) {
   const response = await fetch(url, {
@@ -153,7 +153,7 @@ export const wager = async (
 }
 
 export const startGame = async (userID: string) => {
-  await postData(url + '/api/wager', { "ID": userID })
+  await postData(url + '/api/start', { "ID": userID })
   .then(data => {
     // console.log(data);
   })
