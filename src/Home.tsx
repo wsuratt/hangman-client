@@ -45,6 +45,7 @@ const Home = () => {
   const [guessedLetters, setGuessedLetters] = useState(initialLetters);
   const [wrongGuesses, setWrongGuesses] = useState(initialLetters);
   const [timeLeft, setTimeLeft] = useState(15);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [restartTimer, setRestartTimer] = useState(0);
   const [clickedStart, setClickedStart] = useState(false);
   const [startCount, setStartCount] = useState(3);
@@ -216,6 +217,7 @@ const Home = () => {
   const onGuess = async (letter: string) => {
     if (!wallet || !wagerProgram)
       return;
+    setIsPlaying(false);
     setHasGuessed(true);
     let currWord = await guess(wallet.publicKey.toString(), letter);
     // let currWord = await getWord(wallet.publicKey.toString());
@@ -229,6 +231,7 @@ const Home = () => {
       setNumGuesses(parseInt(currNumGuesses));
     if (!currWord.includes("*"))
       setGameOver(true);
+      setIsPlaying(true);
     setTimeout(() => setHasGuessed(false), 4000);
   }
 
@@ -271,7 +274,7 @@ const Home = () => {
             <div className={classes.timer}>
               <CountdownCircleTimer
                 key={restartTimer}
-                isPlaying
+                isPlaying={isPlaying}
                 size={75}
                 duration={15}
                 trailColor={'#000000'}
