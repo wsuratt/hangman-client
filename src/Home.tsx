@@ -240,6 +240,8 @@ const Home = () => {
 
   return (
     <main className={classes.main}>
+      <Typography className={classes.game}>HANGMAN</Typography>
+      <Typography className={classes.title2}>BY </Typography>
       <Typography className={classes.title}>SOL</Typography>
       <Typography className={classes.title2}>WAGER</Typography>
       <br/>
@@ -329,6 +331,14 @@ const useStyles = makeStyles({
     fontFamily: "Verdana",
     marginTop: "15px",
   },
+  game: {
+    color: "white",
+    marginTop: "25px",
+    fontSize: "50px",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Verdana",
+  },
   incorrectText: {
     color: "red",
     fontSize: "50px",
@@ -383,7 +393,7 @@ const useStyles = makeStyles({
     color: "#512da8",
     display: "inline",
     marginTop: "25px",
-    fontSize: "50px",
+    fontSize: "25px",
     fontWeight: "bold",
     textAlign: "center",
     fontFamily: "Verdana",
@@ -392,7 +402,7 @@ const useStyles = makeStyles({
     color: "white",
     display: "inline",
     marginTop: "25px",
-    fontSize: "50px",
+    fontSize: "25px",
     fontWeight: "bold",
     textAlign: "center",
     fontFamily: "Verdana",
