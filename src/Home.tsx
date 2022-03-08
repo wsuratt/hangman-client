@@ -29,7 +29,8 @@ import {
   initialize,
   wager,
   guess,
-  startGame
+  startGame,
+  endGame
 } from "./wager";
 
 const Home = () => {
@@ -116,10 +117,14 @@ const Home = () => {
   });
 
   useEffect(() => {
-      if (timeLeft == 0)
-      {
-        setGameOver(true);
-      }
+    if (!wallet || !wagerProgram)
+      return;
+      
+    if (timeLeft == 0)
+    {
+      setGameOver(true);
+      endGame(wallet.publicKey.toString())
+    }
   });
 
   useEffect(() => {

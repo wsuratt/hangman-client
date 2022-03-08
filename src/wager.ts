@@ -174,15 +174,10 @@ export const guess = async (ID: string, guess: string): Promise<string> => {
   return word;
 }
 
-// export const end = async (
-//   program: anchor.Program,
-//   owner: anchor.web3.PublicKey,
-// ) => {
-//   await program.rpc.endGame({
-//       accounts: {
-//           owner: owner,
-//           pool: POOL_PDA,
-//           systemProgram: web3.SystemProgram.programId,
-//       }
-//   });
-// }
+export const endGame = async (ID: string) => {
+  await postData(url + '/api/end', { "ID": ID })
+  .then(data => {
+  })
+  .catch((error) => {
+  });
+}
