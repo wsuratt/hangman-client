@@ -62,7 +62,7 @@ export const getPayoutAmount = async (
 
   let amount = +((((losses/wins) * 0.1) * 0.8).toFixed(2));
 
-  return losses;
+  return amount;
 }
 export const getWagerProgram = (
   anchorWallet: typeof anchor.Wallet,
