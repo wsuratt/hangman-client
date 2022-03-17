@@ -27,6 +27,7 @@ import {
   getNumGuesses,
   SOLWAGER_PROGRAM,
   initialize,
+  createUser,
   wager,
   guess,
   startGame,
@@ -42,7 +43,7 @@ const Home = () => {
   const [wagerProgram, setWagerProgram] = useState<anchor.Program>();
   const [hasGuessed, setHasGuessed] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
-  const [numGuesses, setNumGuesses] = useState(10);
+  const [numGuesses, setNumGuesses] = useState(8);
   const [guessedLetters, setGuessedLetters] = useState(initialLetters);
   const [wrongGuesses, setWrongGuesses] = useState(initialLetters);
   const [timeLeft, setTimeLeft] = useState(15);
@@ -73,7 +74,7 @@ const Home = () => {
     setWord("");
     setHasGuessed(false);
     setHasStarted(false);
-    setNumGuesses(10);
+    setNumGuesses(8);
     setGuessedLetters(initialLetters);
     setWrongGuesses(initialLetters);
     setTimeLeft(15);
@@ -87,7 +88,6 @@ const Home = () => {
     if (!wallet) {
       return;
     }
-    getWord(wallet.publicKey.toString());
     getPayout();
   });
 
@@ -95,7 +95,7 @@ const Home = () => {
     if (!wallet) {
       return;
     }
-
+    createUser(wallet.publicKey.toString());
     const program = getWagerProgram(
       wallet as typeof anchor.Wallet,
       connection,
@@ -177,31 +177,34 @@ const Home = () => {
       if (!wallet || !wagerProgram)
         return;
 
-      await wager(wagerProgram, wallet.publicKey);
-      // await initialize(wagerProgram, wallet.publicKey);
-
-      let currWord = await getWord(wallet.publicKey.toString());
-      console.log(currWord);
-      setWord(currWord);
-      let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
-      setNumGuesses(parseInt(currNumGuesses));
-      setHasWagered(true);
-  
-      setAlertState({
-        open: true,
-        message:
-          "Wager succeeded!",
-        severity: "success",
+      const wagerStatus = await new Promise<boolean>(resolve => {
+        resolve(wager(wagerProgram, wallet.publicKey));
       });
+      console.log(wagerStatus)
+      // await initialize(wagerProgram, wallet.publicKey);
+      if (wagerStatus)
+      {
+        let currWord = await getWord(wallet.publicKey.toString());
+        console.log(currWord);
+        setWord(currWord);
+        let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
+        setNumGuesses(parseInt(currNumGuesses));
+        setHasWagered(true);
+    
+        setAlertState({
+          open: true,
+          message:
+            "Wager succeeded!",
+          severity: "success",
+        });
+      }
+      else
+      {
+        throw 'wager failed';
+      }
     } catch (error: any) {
       console.log(error);
       let message = error.msg || "Wager failed! Please try again!";
-      if (!error.msg) {
-        if (error.message.indexOf("0x138")) {
-        } else if (error.message.indexOf("0x135")) {
-          message = `Insufficient funds to bet. Please fund your wallet.`;
-        }
-      }
   
       setAlertState({
         open: true,
@@ -224,6 +227,7 @@ const Home = () => {
       return;
     setIsPlaying(false);
     setHasGuessed(true);
+    // make this a promise
     let currWord = await guess(wallet.publicKey.toString(), letter);
     // let currWord = await getWord(wallet.publicKey.toString());
     console.log("curr: " + currWord);
@@ -233,11 +237,12 @@ const Home = () => {
       setWrongGuesses(prevWrongGuesses => [...prevWrongGuesses, letter]);
     setGuessedLetters(prevGuessedLetters => [...prevGuessedLetters, letter]);
     let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
-      setNumGuesses(parseInt(currNumGuesses));
+    setNumGuesses(parseInt(currNumGuesses));
+    console.log(currNumGuesses)
     if (!currWord.includes("*"))
       setGameOver(true);
       setIsPlaying(true);
-    setTimeout(() => setHasGuessed(false), 4000);
+    setTimeout(() => setHasGuessed(false), 1000);
   }
 
   const onOver = async () => {

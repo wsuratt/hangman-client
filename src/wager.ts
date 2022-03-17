@@ -15,7 +15,8 @@ const POOL_PDA = new anchor.web3.PublicKey(
   "CoDTqzRy4P4jQqz3FadbWJJHdLupsQH7PrrvLNgodNFX"
 );
 
-const url = "https://hangman-solwager.herokuapp.com";
+// const url = "https://hangman-solwager.herokuapp.com";
+const url = "http://localhost:4800";
 
 async function getData(url = '', data = {}) {
   const response = await fetch(url, {
@@ -76,7 +77,7 @@ export const getWagerProgram = (
   return new anchor.Program(idl, programId, provider)
 };
 
-const createUser = async (ID: string) => {
+export const createUser = async (ID: string) => {
   putData(url + '/api/users', { "ID": ID })
   .then(data => {
     console.log('Create user:', data);
@@ -95,7 +96,6 @@ export const getWord = async (ID: string): Promise<string>  => {
   .catch((error) => {
     console.log(error);
     word = "*****";
-    createUser(ID);
   });
   return word;
 }
@@ -134,7 +134,7 @@ export const initialize = async (
 export const wager = async (
   program: anchor.Program,
   owner: anchor.web3.PublicKey
-) => {
+): Promise<boolean> => {
   let tx = await program.rpc.wager({
       accounts: {
           owner: owner,
@@ -143,12 +143,16 @@ export const wager = async (
           systemProgram: web3.SystemProgram.programId,
       }
   });
-  await postData(url + '/api/wager', { "ID": owner.toString(), "sig": tx })
-  .then(data => {
-    // console.log(data);
-  })
-  .catch((error) => {
-    console.error('error:', error);
+  return new Promise<boolean>(resolve => {
+    console.log(tx);
+    postData(url + '/api/wager', { "ID": owner.toString(), "sig": tx })
+    .then(data => {
+      resolve(true);
+    })
+    .catch((error) => {
+      console.error('error:', error);
+      resolve(false);
+    });
   });
 }
 
