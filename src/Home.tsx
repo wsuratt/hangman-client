@@ -385,7 +385,7 @@ const useStyles = makeStyles({
     color: "white",
     fontSize: "25px",
     fontWeight: "bold",
-    marginTop: "50px",
+    marginTop: "25px",
     fontFamily: "Verdana",
   },
   startText: {
