@@ -12,7 +12,7 @@ const FEE_WALLET = new anchor.web3.PublicKey(
 );
 
 const POOL_PDA = new anchor.web3.PublicKey(
-  "CoDTqzRy4P4jQqz3FadbWJJHdLupsQH7PrrvLNgodNFX"
+  "FJGhH3QbScekoYhW3pFy8BWNACD6bKhuJcvURUtEFUrY"
 );
 
 const url = "https://hangman-solwager.herokuapp.com";
@@ -119,16 +119,18 @@ export const initialize = async (
   owner: anchor.web3.PublicKey
 ) => {
   const [account, accountBump] = await web3.PublicKey.findProgramAddress(
-    [Buffer.from("hangman_test")],
+    [Buffer.from("hangman_solwager")],
     program.programId
   );
-  await program.rpc.initialize(accountBump, {
+  console.log(account)
+  let tx = await program.rpc.initialize(accountBump, {
     accounts: {
       owner: owner,
       pool: account,
       systemProgram: web3.SystemProgram.programId,
     },
   });
+  console.log(tx)
 }
 
 export const wager = async (

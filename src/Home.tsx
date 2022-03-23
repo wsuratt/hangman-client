@@ -180,7 +180,8 @@ const Home = () => {
       const wagerStatus = await new Promise<boolean>(resolve => {
         resolve(wager(wagerProgram, wallet.publicKey));
       });
-      console.log(wagerStatus)
+      // const wagerStatus = false;
+      // console.log(wagerStatus)
       // await initialize(wagerProgram, wallet.publicKey);
       if (wagerStatus)
       {
