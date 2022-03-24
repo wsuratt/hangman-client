@@ -89,8 +89,9 @@ const Home = () => {
     if (!wallet) {
       return;
     }
-    console.log("hey lol");
-    getPayout();
+    if (!hasWagered){
+      getPayout();
+    }
   });
 
   useEffect(() => {
