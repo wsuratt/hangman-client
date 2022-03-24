@@ -89,6 +89,7 @@ const Home = () => {
     if (!wallet) {
       return;
     }
+    console.log("hey lol");
     getPayout();
   });
 
