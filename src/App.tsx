@@ -12,6 +12,7 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import Home from './Home'
+import Maintenance from './Maintenance'
 import { clusterApiUrl } from '@solana/web3.js';
 
 // Default styles that can be overridden by your app
@@ -45,6 +46,7 @@ const App = () => {
             <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>
                     <Home/>
+                    {/* <Maintenance/> */}
                 </WalletModalProvider>
             </WalletProvider>
         </ConnectionProvider>
