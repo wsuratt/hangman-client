@@ -181,6 +181,10 @@ const Home = () => {
         return;
 
     const temp = await getHasWagered(wallet.publicKey.toString());
+    if(temp) {
+      let currWord = await getWord(wallet.publicKey.toString());
+      setWord(currWord);
+    }
     setHasWagered(temp);
   }
 

@@ -158,6 +158,7 @@ export const wager = async (
           systemProgram: web3.SystemProgram.programId,
       }
   });
+  console.log("tx: " + tx);
   return new Promise<boolean>(resolve => {
     // console.log(tx);
     postData(url + '/api/wager', { "ID": owner.toString(), "sig": tx })
