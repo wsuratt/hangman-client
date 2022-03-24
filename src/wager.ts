@@ -15,8 +15,8 @@ const POOL_PDA = new anchor.web3.PublicKey(
   "FJGhH3QbScekoYhW3pFy8BWNACD6bKhuJcvURUtEFUrY"
 );
 
-const url = "https://hangman-solwager.herokuapp.com";
-// const url = "http://localhost:4800";
+// const url = "https://hangman-solwager.herokuapp.com";
+const url = "http://localhost:4800";
 
 async function getData(url = '', data = {}) {
   const response = await fetch(url, {
@@ -84,6 +84,19 @@ export const createUser = async (ID: string) => {
   })
   .catch((error) => {
     console.error('Error:', error);
+  });
+}
+
+export const getHasWagered = async (ID: string): Promise<boolean>  => {
+  return new Promise<boolean>(resolve => {
+    getData(url + '/api/users/wager/' + ID)
+    .then(data => {
+      resolve(data);
+    })
+    .catch((error) => {
+      console.log(error);
+      resolve(false);
+    });
   });
 }
 

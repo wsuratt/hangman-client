@@ -22,6 +22,7 @@ import { web3 } from '@project-serum/anchor';
 import { Provider, Program } from '@project-serum/anchor';
 import {
   getPayoutAmount,
+  getHasWagered,
   getWagerProgram,
   getWord,
   getNumGuesses,
@@ -102,6 +103,7 @@ const Home = () => {
       SOLWAGER_PROGRAM
     );
     setWagerProgram(program);
+    initHasWagered();
   }, [wallet, connection]);
 
   useEffect(() => {
@@ -170,6 +172,14 @@ const Home = () => {
 
     const amount = await getPayoutAmount(wagerProgram);
     setPayoutAmount(amount);
+  }
+
+  const initHasWagered = async () => {
+    if (!wallet)
+        return;
+
+    const temp = await getHasWagered(wallet.publicKey.toString());
+    setHasWagered(temp);
   }
 
   const onWager = async () => {
