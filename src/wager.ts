@@ -37,7 +37,7 @@ async function postData(url = '', data = {}) {
     },
     body: JSON.stringify(data),
   })
-  console.log(response);
+  // console.log(response);
   return response.json();
 }
 
@@ -61,7 +61,7 @@ export const getPayoutAmount = async (
   let wins = parseInt(poolAccount.win) + 1;
   let losses = parseInt(poolAccount.loss);
 
-  let amount = +((((losses/wins) * 0.1) * 0.8).toFixed(2));
+  let amount = +((((losses/wins) * 0.001) * 0.8).toFixed(2)); //remove two 0s
 
   return amount;
 }
@@ -80,10 +80,10 @@ export const getWagerProgram = (
 export const createUser = async (ID: string) => {
   putData(url + '/api/users', { "ID": ID })
   .then(data => {
-    console.log('Create user:', data);
+    // console.log('Create user:', data);
   })
   .catch((error) => {
-    console.error('Error:', error);
+    // console.error('Error:', error);
   });
 }
 
@@ -94,7 +94,7 @@ export const getHasWagered = async (ID: string): Promise<boolean>  => {
       resolve(data);
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       resolve(false);
     });
   });
@@ -107,7 +107,7 @@ export const getWord = async (ID: string): Promise<string>  => {
     word = data.word;
   })
   .catch((error) => {
-    console.log(error);
+    // console.log(error);
     word = "*****";
   });
   return word;
@@ -118,7 +118,7 @@ export const getNumGuesses = async (ID: string): Promise<string>  => {
   await getData(url + '/api/users/guesses/' + ID)
   .then(data => {
     str = data;
-    console.log('Guesses: ' + data);
+    // console.log('Guesses: ' + data);
   })
   .catch((error) => {
     str = "0";
@@ -135,7 +135,7 @@ export const initialize = async (
     [Buffer.from("hangman_solwager")],
     program.programId
   );
-  console.log(account)
+  // console.log(account)
   let tx = await program.rpc.initialize(accountBump, {
     accounts: {
       owner: owner,
@@ -143,7 +143,7 @@ export const initialize = async (
       systemProgram: web3.SystemProgram.programId,
     },
   });
-  console.log(tx)
+  // console.log(tx)
 }
 
 export const wager = async (
@@ -159,7 +159,7 @@ export const wager = async (
       }
   });
   return new Promise<boolean>(resolve => {
-    console.log(tx);
+    // console.log(tx);
     postData(url + '/api/wager', { "ID": owner.toString(), "sig": tx })
     .then(data => {
       resolve(true);

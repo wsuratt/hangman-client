@@ -196,7 +196,6 @@ const Home = () => {
       if (wagerStatus)
       {
         let currWord = await getWord(wallet.publicKey.toString());
-        console.log(currWord);
         setWord(currWord);
         let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
         setNumGuesses(parseInt(currNumGuesses));
@@ -241,7 +240,6 @@ const Home = () => {
     // make this a promise
     let currWord = await guess(wallet.publicKey.toString(), letter);
     // let currWord = await getWord(wallet.publicKey.toString());
-    console.log("curr: " + currWord);
     setRestartTimer(prevRestartTimer => prevRestartTimer + 1);
     setWord(currWord);
     if (!currWord.includes(letter))
@@ -249,7 +247,6 @@ const Home = () => {
     setGuessedLetters(prevGuessedLetters => [...prevGuessedLetters, letter]);
     let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
     setNumGuesses(parseInt(currNumGuesses));
-    console.log(currNumGuesses)
     if (!currWord.includes("*"))
       setGameOver(true);
       setIsPlaying(true);
