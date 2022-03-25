@@ -288,7 +288,7 @@ const Home = () => {
               <h3>Connect your wallet.</h3>
             </Typography>
             <Typography className={classes.text}>
-              <h3>Place your wager of 0.1 SOL and start the game.</h3>
+              <h3>Place a wager of 0.1 SOL and start the game.</h3>
             </Typography>
             <Typography className={classes.text}>
               <h3>Try and guess the hidden word in 8 turns with a time limit of 15 seconds for each guess.</h3>
