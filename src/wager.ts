@@ -4,7 +4,7 @@ import { web3 } from '@project-serum/anchor';
 const idl = require('./hangman_program.json');
 
 export const SOLWAGER_PROGRAM = new anchor.web3.PublicKey(
-  "FMUgWojverbaoVHq1tkLf9xxFe1eusyN4AjJQ1GBBx4A"
+  "8VxWJzmYtVrC755tFjQGMLhAN3hgPfCNPReEtN3wBzYz"
 );
 
 const FEE_WALLET = new anchor.web3.PublicKey(
@@ -12,7 +12,7 @@ const FEE_WALLET = new anchor.web3.PublicKey(
 );
 
 const POOL_PDA = new anchor.web3.PublicKey(
-  "FJGhH3QbScekoYhW3pFy8BWNACD6bKhuJcvURUtEFUrY"
+  "6N4dfkqdTFsdJuu6gvvKCUhUX4swWqeTRvt4zonJGgW4"
 );
 
 const url = "https://hangman-solwager.herokuapp.com";
@@ -136,7 +136,7 @@ export const initialize = async (
     program.programId
   );
   // console.log(account)
-  let tx = await program.rpc.initialize(accountBump, {
+  let tx = await program.rpc.initialize({
     accounts: {
       owner: owner,
       pool: account,
