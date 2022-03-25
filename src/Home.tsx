@@ -288,16 +288,19 @@ const Home = () => {
               <h3>Connect your wallet.</h3>
             </Typography>
             <Typography className={classes.text}>
-              <h3>Place a wager of 0.1 SOL and start the game.</h3>
+              <h3>Place a wager of 0.1 SOL (with a 0.01 SOL fee) and start the game.</h3>
             </Typography>
             <Typography className={classes.text}>
-              <h3>Try and guess the hidden word in 8 turns with a time limit of 15 seconds for each guess.</h3>
+              <h3>Try and guess the hidden word in 8 turns with 15 seconds for each guess.</h3>
             </Typography>
             <Typography className={classes.text}>
               <h3>Every guess must be a valid letter. Type each guess using the keyboard.</h3>
             </Typography>
             <Typography className={classes.text}>
               <h3>After each guess the letter will either be revealed in the hidden word or shown below it as an incorrect guess.</h3>
+            </Typography>
+            <Typography className={classes.text}>
+              <h3>If you guess the word your wager will be returned with a payout amount. If you don't guess the word your wager will be lost. Good luck!</h3>
             </Typography>
           </div>
           <PlayButton play={OnPlay}/>
@@ -418,7 +421,9 @@ const useStyles = makeStyles({
   },
   instructions: {
     margin: "auto",
-    width: "40%",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    maxWidth: "540px",
     textAlign: "left",
   },
   loadingCircle: {

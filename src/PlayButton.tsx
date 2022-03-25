@@ -11,12 +11,13 @@ export default function PlayButton(props: any) {
         sx={{
           height: 48,
           width: 167,
-          color: '#512da8',
+          color: '#B026FF',
           marginTop: 3,
-          borderColor: '#512da8',
+          marginBottom: 10,
+          borderColor: '#B026FF',
           '&:hover': {
-            borderColor: 'white',
-            color: 'white'
+            borderColor: '#512da8',
+            color: '#512da8'
           }
         }}
         onClick={() => {
