@@ -75,7 +75,7 @@ export default function WagerButton(props: any) {
       >
         {isProcessing ? 
           <CircularProgress className={classes.loadingCircle}/> 
-          : "Wager 0.001 Sol" //remove two 0s
+          : "Wager 0.05 SOL"
         }
       </Button>
     </div>

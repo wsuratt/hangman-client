@@ -18,6 +18,7 @@ const MobilePage = () => {
       <Typography className={classes.title}>SOL</Typography>
       <Typography className={classes.title2}>WAGER</Typography>
       <Typography className={classes.text2}>Hangman not available on mobile :(</Typography>
+        <Typography className={classes.text2}>Please connect with a computer</Typography>
     </main>
   )
 };
