@@ -1,0 +1,12 @@
+.mobilePage{
+  display: none;
+}
+
+@media only screen and (max-width: 850px) { 
+  .secondary { 
+    display: none; 
+  } 
+  .mobilePage {
+      display: block;
+  }
+}

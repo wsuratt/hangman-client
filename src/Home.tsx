@@ -3,6 +3,8 @@ import WagerButton from './WagerButton';
 import StartButton from './StartButton';
 import PlayButton from './PlayButton';
 import HomeButton from './HomeButton';
+import MobilePage from './MobilePage';
+import './homestyles.css';
 import {
   CircularProgress,
   Snackbar,
@@ -273,111 +275,116 @@ const Home = () => {
 
   return (
     <main className={classes.main}>
-      <Typography className={classes.game}>HANGMAN</Typography>
-      <Typography className={classes.title2}>BY </Typography>
-      <Typography className={classes.title}>SOL</Typography>
-      <Typography className={classes.title2}>WAGER</Typography>
-      <br/>
-      {showInstructions ? (
-        <div>
-          <br/>
-          <Typography className={classes.title3}>HOW TO PLAY</Typography>
-          <p></p>
-          <div className={classes.instructions}>
-          <Typography className={classes.text}>
-              <h3>Connect your wallet.</h3>
-            </Typography>
+      <div className = "mobilePage">
+        <MobilePage />
+      </div>
+      <div className = "secondary">
+        <Typography className={classes.game}>HANGMAN</Typography>
+        <Typography className={classes.title2}>BY </Typography>
+        <Typography className={classes.title}>SOL</Typography>
+        <Typography className={classes.title2}>WAGER</Typography>
+        <br/>
+        {showInstructions ? (
+          <div>
+            <br/>
+            <Typography className={classes.title3}>HOW TO PLAY</Typography>
+            <p></p>
+            <div className={classes.instructions}>
             <Typography className={classes.text}>
-              <h3>Place a wager of 0.1 SOL (with a 0.01 SOL fee) and start the game.</h3>
-            </Typography>
-            <Typography className={classes.text}>
-              <h3>Try and guess the hidden word in 8 turns with 15 seconds for each guess.</h3>
-            </Typography>
-            <Typography className={classes.text}>
-              <h3>Every guess must be a valid letter. Type each guess using the keyboard.</h3>
-            </Typography>
-            <Typography className={classes.text}>
-              <h3>After each guess the letter will either be revealed in the hidden word or shown below it as an incorrect guess.</h3>
-            </Typography>
-            <Typography className={classes.text}>
-              <h3>If you guess the word your wager will be returned with a payout amount. If you don't guess the word your wager will be lost. Good luck!</h3>
-            </Typography>
+                <h3>Connect your wallet.</h3>
+              </Typography>
+              <Typography className={classes.text}>
+                <h3>Place a wager of 0.1 SOL (with a 0.01 SOL fee) and start the game.</h3>
+              </Typography>
+              <Typography className={classes.text}>
+                <h3>Try and guess the hidden word in 8 turns with 15 seconds for each guess.</h3>
+              </Typography>
+              <Typography className={classes.text}>
+                <h3>Every guess must be a valid letter. Type each guess using the keyboard.</h3>
+              </Typography>
+              <Typography className={classes.text}>
+                <h3>After each guess the letter will either be revealed in the hidden word or shown below it as an incorrect guess.</h3>
+              </Typography>
+              <Typography className={classes.text}>
+                <h3>If you guess the word your wager will be returned with a payout amount. If you don't guess the word your wager will be lost. Good luck!</h3>
+              </Typography>
+            </div>
+            <PlayButton play={OnPlay}/>
           </div>
-          <PlayButton play={OnPlay}/>
-        </div>
-      ) : (
-        <div>
-          {!hasStarted ? (
-            <div className={classes.walletButton}>
-              <WalletMultiButton />
-            </div>
-          ) : (
-            <Typography className={classes.guessText}>Guesses Remaining: {numGuesses}</Typography>
-          )}
-          {wallet && !hasWagered ? (
-            <div>
-              <WagerButton 
-                onWager={onWager}
-              />
-              <Typography className={classes.payoutText}>ESTIMATED PAYOUT: {payoutAmount} SOL</Typography>
-            </div>
-          ) : !hasStarted && !clickedStart && hasWagered ? (
-            <StartButton start={OnStart}/>
-          ) : !hasStarted && hasWagered ? (
-            <div className={classes.startText}>
-              {startCount}
-            </div>
-          ) : hasStarted ? (
-            <div>
-              {timeLeft > 0 && !gameOver ? (
-                <div className={classes.timer}>
-                  <CountdownCircleTimer
-                    key={restartTimer}
-                    isPlaying={isPlaying}
-                    size={75}
-                    duration={15}
-                    trailColor={'#000000'}
-                    colors={['#008000', '#FFFF00', '#FF0000', '#FF0000']}
-                    colorsTime={[15, 10, 5, 0]}
-                  >
-                    {renderTime}
-                  </CountdownCircleTimer>
-                </div>
-              ) : numGuesses == 0 ? (
-                <div>
-                  <Typography className={classes.incorrectText}>YOU LOST!</Typography>
-                  <HomeButton home={home}/>
-                </div>
-              ) : numGuesses > 0 && timeLeft > 0 ? (
-                <div>
-                  <Typography className={classes.correctText}>YOU WON!</Typography>
-                  <HomeButton home={home}/>
-                </div>
-              ) : (
-                <div>
-                  <Typography className={classes.incorrectText}>OUT OF TIME!</Typography>
-                  <HomeButton home={home}/>
-                </div>
-              )}
-              <Typography className={classes.codeText}>{word}</Typography>
-              <Typography className={classes.text}>Type a letter to guess</Typography>
-              <Typography className={classes.incorrectText2}>{wrongGuesses.map(letter => letter + ", ")}</Typography>
-            </div>
-          ): null}
-          <Snackbar
-            open={alertState.open}
-            autoHideDuration={6000}
-            onClose={() => setAlertState({ ...alertState, open: false })}
-          >
-            <Alert
+        ) : (
+          <div>
+            {!hasStarted ? (
+              <div className={classes.walletButton}>
+                <WalletMultiButton />
+              </div>
+            ) : (
+              <Typography className={classes.guessText}>Guesses Remaining: {numGuesses}</Typography>
+            )}
+            {wallet && !hasWagered ? (
+              <div>
+                <WagerButton 
+                  onWager={onWager}
+                />
+                <Typography className={classes.payoutText}>ESTIMATED PAYOUT: {payoutAmount} SOL</Typography>
+              </div>
+            ) : !hasStarted && !clickedStart && hasWagered ? (
+              <StartButton start={OnStart}/>
+            ) : !hasStarted && hasWagered ? (
+              <div className={classes.startText}>
+                {startCount}
+              </div>
+            ) : hasStarted ? (
+              <div>
+                {timeLeft > 0 && !gameOver ? (
+                  <div className={classes.timer}>
+                    <CountdownCircleTimer
+                      key={restartTimer}
+                      isPlaying={isPlaying}
+                      size={75}
+                      duration={15}
+                      trailColor={'#000000'}
+                      colors={['#008000', '#FFFF00', '#FF0000', '#FF0000']}
+                      colorsTime={[15, 10, 5, 0]}
+                    >
+                      {renderTime}
+                    </CountdownCircleTimer>
+                  </div>
+                ) : numGuesses == 0 ? (
+                  <div>
+                    <Typography className={classes.incorrectText}>YOU LOST!</Typography>
+                    <HomeButton home={home}/>
+                  </div>
+                ) : numGuesses > 0 && timeLeft > 0 ? (
+                  <div>
+                    <Typography className={classes.correctText}>YOU WON!</Typography>
+                    <HomeButton home={home}/>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography className={classes.incorrectText}>OUT OF TIME!</Typography>
+                    <HomeButton home={home}/>
+                  </div>
+                )}
+                <Typography className={classes.codeText}>{word}</Typography>
+                <Typography className={classes.text}>Type a letter to guess</Typography>
+                <Typography className={classes.incorrectText2}>{wrongGuesses.map(letter => letter + ", ")}</Typography>
+              </div>
+            ): null}
+            <Snackbar
+              open={alertState.open}
+              autoHideDuration={6000}
               onClose={() => setAlertState({ ...alertState, open: false })}
-              severity={alertState.severity}
             >
-              {alertState.message}
-            </Alert>
-          </Snackbar>
-        </div>
-      )}
+              <Alert
+                onClose={() => setAlertState({ ...alertState, open: false })}
+                severity={alertState.severity}
+              >
+                {alertState.message}
+              </Alert>
+            </Snackbar>
+          </div>
+        )}
+      </div>
     </main>
   )
 };

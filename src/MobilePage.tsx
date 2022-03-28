@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-const Maintenance = () => {
+const MobilePage = () => {
   const classes = useStyles();
 
   return (
@@ -17,7 +17,7 @@ const Maintenance = () => {
       <Typography className={classes.title2}>BY </Typography>
       <Typography className={classes.title}>SOL</Typography>
       <Typography className={classes.title2}>WAGER</Typography>
-      <Typography className={classes.text2}>currently under maintenance... will be back up soon...</Typography>
+      <Typography className={classes.text2}>Hangman not available on mobile :(</Typography>
     </main>
   )
 };
@@ -73,4 +73,4 @@ const useStyles = makeStyles({
     fontFamily: "Verdana",
   },
 }, { index: 1 });
-export default Maintenance;
+export default MobilePage;
