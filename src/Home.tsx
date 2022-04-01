@@ -198,7 +198,7 @@ const Home = () => {
         return;
 
       const wagerStatus = await new Promise<boolean>(resolve => {
-        resolve(wager(wagerProgram, wallet.publicKey));
+        resolve(wager(wagerProgram, wallet.publicKey, connection));
       });
       // const wagerStatus = false;
       // console.log(wagerStatus)
