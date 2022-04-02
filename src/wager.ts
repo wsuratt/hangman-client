@@ -261,7 +261,7 @@ export const wager = async (
     "singleGossip",
     false
   )
-  console.log(status)
+
   if (!status?.err) {
     return new Promise<boolean>(resolve => {
       // console.log(tx);
@@ -276,7 +276,6 @@ export const wager = async (
     });
   }
   else {
-    console.log("hi");
     return false;
   }
 }
