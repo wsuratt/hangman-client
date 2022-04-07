@@ -3,10 +3,10 @@
 }
 
 @media only screen and (max-width: 850px) { 
-  .secondary { 
+  /* .secondary { 
     display: none; 
   } 
   .mobilePage {
-      display: none;
-  }
+      display: block;
+  } */
 }
