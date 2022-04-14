@@ -23,8 +23,8 @@ export default function TXButton(props: any) {
         color="primary"
         focused
         label="TX ID"
-        // value={tx}
-        // onInput={ e=>setTX((e.target as HTMLTextAreaElement).value)}
+        value={tx}
+        onInput={ e=>setTX((e.target as HTMLTextAreaElement).value)}
         InputProps={{
           className: classes.textField
         }}
