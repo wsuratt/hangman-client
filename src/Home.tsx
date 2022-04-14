@@ -536,7 +536,7 @@ const useStyles = makeStyles({
   },
   transactionText: {
     color: "white",
-    marginTop: "75px",
+    marginTop: "350px",
     fontFamily: "Verdana",
   },
   walletButton: {
