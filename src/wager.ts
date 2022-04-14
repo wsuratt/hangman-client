@@ -1,5 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import { web3 } from '@project-serum/anchor';
+import TXButton from "./TXButton";
 
 const idl = require('./hangman_program.json');
 
@@ -278,6 +279,23 @@ export const wager = async (
   else {
     return false;
   }
+}
+
+export const checkTX = async (
+  owner: anchor.web3.PublicKey,
+  tx: string
+): Promise<boolean> => {
+  return new Promise<boolean>(resolve => {
+    // console.log(tx);
+    postData(url + '/api/wager', { "ID": owner.toString(), "sig": tx })
+    .then(data => {
+      resolve(true);
+    })
+    .catch((error) => {
+      console.error('error:', error);
+      resolve(false);
+    });
+  });
 }
 
 export const startGame = async (userID: string) => {

@@ -3,6 +3,7 @@ import WagerButton from './WagerButton';
 import StartButton from './StartButton';
 import PlayButton from './PlayButton';
 import HomeButton from './HomeButton';
+import TXButton from './TXButton';
 import MobilePage from './MobilePage';
 import './homestyles.css';
 import {
@@ -12,6 +13,7 @@ import {
   Button,
   Box,
   Typography,
+  TextField,
 } from '@material-ui/core';
 import {
   WalletMultiButton
@@ -192,6 +194,35 @@ const Home = () => {
     setHasWagered(temp);
   }
 
+  const validateTX = async (isValid: boolean) => {
+    if (!wallet || !wagerProgram)
+        return;
+
+    if (isValid){
+      let currWord = await getWord(wallet.publicKey.toString());
+      setWord(currWord);
+      let currNumGuesses = await getNumGuesses(wallet.publicKey.toString());
+      setNumGuesses(parseInt(currNumGuesses));
+      setHasWagered(true);
+
+      setAlertState({
+        open: true,
+        message:
+          "Wager succeeded!",
+        severity: "success",
+      });
+    }
+    else {
+      let message = "Wager failed! Please try again!";
+  
+      setAlertState({
+        open: true,
+        message,
+        severity: "error",
+      });
+    }
+  }
+
   const onWager = async () => {
     try {
       if (!wallet || !wagerProgram)
@@ -326,6 +357,11 @@ const Home = () => {
                   onWager={onWager}
                 />
                 <Typography className={classes.payoutText}>ESTIMATED PAYOUT: {payoutAmount} SOL</Typography>
+                <Typography className={classes.transactionText}>If your transaction goes through but doesn't show, please enter the transaction ID in the box below to play:</Typography>
+                <TXButton
+                  owner={wallet.publicKey}
+                  validateTX={validateTX}
+                />
               </div>
             ) : !hasStarted && !clickedStart && hasWagered ? (
               <StartButton start={OnStart}/>
@@ -463,6 +499,9 @@ const useStyles = makeStyles({
     color: "white",
     fontFamily: "Verdana",
   },
+  textField: {
+    color: "white",
+  },
   timer: {
     display: "flex",
     justifyContent: "center",
@@ -493,6 +532,11 @@ const useStyles = makeStyles({
     fontSize: "30px",
     fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Verdana",
+  },
+  transactionText: {
+    color: "white",
+    marginTop: "75px",
     fontFamily: "Verdana",
   },
   walletButton: {
