@@ -13,6 +13,7 @@ export default function TXButton(props: any) {
       });
       
       props.validateTX(isValid);
+      setTX('');
   };
   const classes = useStyles();
 
