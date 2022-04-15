@@ -62,7 +62,8 @@ export const getPayoutAmount = async (
   let wins = parseInt(poolAccount.win) + 1;
   let losses = parseInt(poolAccount.loss);
 
-  let amount = +((((losses/wins) * 0.05) * 0.8).toFixed(2));
+  let fee = ((((losses/wins) * 0.05) * 0.8) * 0.1);
+  let amount = +(((((losses/wins) * 0.05) * 0.8) - fee).toFixed(2));
 
   return amount;
 }
