@@ -250,7 +250,7 @@ export const wager = async (
   let tx = await program.rpc.wager({
       accounts: {
           owner: owner,
-          admin: FEE_WALLET,
+          // admin: FEE_WALLET,
           pool: POOL_PDA,
           systemProgram: web3.SystemProgram.programId,
       }
