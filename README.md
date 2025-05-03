@@ -1,2 +1,2 @@
-# Hangman Client
-Allows users to wager SOL on a game of hangman.
+# Hangman Client (Solana-Enabled Game Frontend)
+Built a responsive React frontend for a single-player Hangman game that integrates with the Solana blockchain. Users can connect their Phantom wallet, place SOL wagers, and receive real-time game feedback. The app communicates with a custom backend to validate guesses and handle payouts, showcasing skills in Web3 wallet integration, UI state management, and interactive game design.
