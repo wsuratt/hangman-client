@@ -39,11 +39,13 @@ import {
   startGame,
   endGame
 } from "./wager";
+import { getNFTMints } from "./nft-lock"
 
 const Home = () => {
   const initialLetters:string[] = [];
 
   const [showInstructions, setShowInstructions] = useState(true);
+  const [hasNFT, setHasNFT] = useState(false);
   const [hasWagered, setHasWagered] = useState(false);
   const [word, setWord] = useState("");
   const [payoutAmount, setPayoutAmount] = useState(0);
@@ -112,6 +114,19 @@ const Home = () => {
     );
     setWagerProgram(program);
     initHasWagered();
+  }, [wallet, connection]);
+
+  useEffect(() => {
+    if (!wallet) {
+      return;
+    }
+    try {
+      getNFTMints(wallet).then((mints: boolean) => {
+        setHasNFT(mints);
+      });
+    } catch {
+      return;
+    }
   }, [wallet, connection]);
 
   useEffect(() => {
@@ -351,7 +366,7 @@ const Home = () => {
             ) : (
               <Typography className={classes.guessText}>Guesses Remaining: {numGuesses}</Typography>
             )}
-            {wallet && !hasWagered ? (
+            {wallet && !hasWagered && hasNFT ? (
               <div>
                 <WagerButton 
                   onWager={onWager}
@@ -362,6 +377,10 @@ const Home = () => {
                   owner={wallet.publicKey}
                   validateTX={validateTX}
                 />
+              </div>
+            ) : wallet && !hasWagered && !hasNFT ? (
+              <div>
+                <Typography className={classes.payoutText}>You don't have an NFT</Typography>
               </div>
             ) : !hasStarted && !clickedStart && hasWagered ? (
               <StartButton start={OnStart}/>
